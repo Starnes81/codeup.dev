@@ -1,10 +1,10 @@
 <?php
 
 echo "<p>GET</p>";
-var_dump($_GET)
+var_dump($_GET);
 
 echo "<p>POST</p>";
-var_dump($_POST)
+var_dump($_POST);
 
 ?>
 
@@ -83,12 +83,25 @@ var_dump($_POST)
 
     <form method="GET" action="">
     <H3>Multiple Choice Test 2</h3>
-    <p>Which are you favorite?</p>
-      <p></p>
-        <label for="fav1"><input type="checkbox" id="fav1" name="fav[]" value="cars"> Cars</label>
-        <label for="fav2"><input type="checkbox" id="fav2" name="fav[]" value="motorcycles" checked> Motorcycles X</label>
-        <label for="fav3"><input type="checkbox" id="fav3" name="fav[]" value="Boats"> Boats</label>
-        <label for="fav4"><input type="checkbox" id="fav3" name="fav[]" value="Boats"> Jets</label>
+    <label for="favorite"> Which are you favorite?</label>
+        <select id="favorite" name="fav[]" multiple>
+            <option value="1">Cars</option>
+            <option value="2">Motorcycles</option>
+            <option value="3">Boats</option>
+            <option value="4">Jets</option>
+    </select>
+    <p>
+    <button>submit</button> 
+    </p>
+</form>
+
+    <form method="POST" action="">
+    <h3>Select Testing</h3>
+        <label for="icecream">Do you like Ice Cream? </label>
+        <select id="icecream" name="icecream">
+            <option value="1">Yes</option>
+            <option value="2" selected>No</option>
+        </select>
     <p>
     <button>submit</button> 
     </p>

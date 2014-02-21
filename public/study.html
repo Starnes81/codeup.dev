@@ -5,21 +5,51 @@
 
 <!DOCTYPE html>
 
-
 <html>
 <head>
 	<title></title>
 </head>
 <body>
 	<script>
+	// the following line will show the OK/CANCEL confirm dialog
+// if the user clicks OK, confirmed will be true, otherwise, confirmed will be false
+var confirmed = confirm('Are you sure you want to do XYZ?');
 
-	// declare and initialize array
-var shapes = ['square','rectangle','circle','triangle'];
-
-// loop through the array and log the values
-for (var i = 0; i < shapes.length; i++) {
-    console.log('The shape at index ' + i + ' is: ' + shapes[i]);
+// we can now use the confirmed variable to make a conditional action
+if (confirmed) {
+    // do XYZ
 }
+
+// you can also put the confirm function directly in the if condition as follows
+if (confirm('Are you sure you want to do XYZ?')) {
+    // do XYZ
+}
+
+	</script>
+</body>
+</html>
+
+
+<!-- // function isEven(input) {
+//     var remainder = input % 2;
+//     // if (remainder === 0) {
+//     //     return true;
+//     // } else {
+//     //     return false;
+//     // }
+//     return (remainder === 0) ? true : false;
+// }
+
+// function sum(a, b) {
+//     return a + b;
+// }
+// 	// declare and initialize array
+// var shapes = ['square','rectangle','circle','triangle'];
+
+// // loop through the array and log the values
+// for (var i = 0; i < shapes.length; i++) {
+//     console.log('The shape at index ' + i + ' is: ' + shapes[i]);
+// }
 // 	for (var i = 1; i < 100; i++) {
 
 //     if (i % 2 !== 0) {
@@ -36,7 +66,4 @@ for (var i = 0; i < shapes.length; i++) {
 
 // bands.forEach(function(element, index, array){
 // 	console.log('the bands at index ' + index + ' is ' + element);
-// });
-	</script>
-</body>
-</html>
+// }); -->

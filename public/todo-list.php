@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 
-<?php 
+<? 
 
+$items = [];
 
 $filename = 'todo.txt';
 function open_file ($filename){
-$handle = fopen($filename, 'r');
-$contents = fread($handle, filesize($filename));
-$items = explode("\n", $contents);
-fclose($handle);
-return $items;
+	if(filesize($filename) == 0) {
+		return array();
+	}
 
+	$handle = fopen($filename, 'r');
+	$contents = fread($handle, filesize($filename));
+	$items = explode("\n", $contents);
+	fclose($handle);
+	return $items;
 }
+
 //fiel operation 
 function save_to_file($filename, $items) {
 	$string = implode("\n", $items);
@@ -19,18 +24,17 @@ function save_to_file($filename, $items) {
 	fwrite($handle, $string);
 	fclose($handle);
 }
-//work on this later
-// if(filesize($filename) > 0) ?  {
-// 	$items = (filesize($filename));
-// }
 
-$items = open_file($filename);
+
+	
+
 // //load file
 if (!empty($_POST["newitem"])){
 	$item = $_POST["newitem"];
 	array_push($items, $item);
 	save_to_file($filename, $items);
 }
+
 //remove
 if (isset($_GET['remove'])){
 	unset($items[$_GET['remove']]);
@@ -55,7 +59,7 @@ if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0) {
 }
 
 
-var_dump($_FILES);
+// var_dump($_FILES);
 ?>
 
 <html>
@@ -66,7 +70,7 @@ var_dump($_FILES);
 
 <h2>TODO List</h2>
 <ul>
-	<?php foreach ($items as $key => $item) {
+	<? foreach ($items as $key => $item) {
 		$newTodo = $key + 1;
 		echo "<li>$item <a href='?remove=$key'>Remove Item</a></li>";
 } 

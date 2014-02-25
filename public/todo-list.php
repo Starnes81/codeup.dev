@@ -27,10 +27,10 @@
 		fwrite($handle, $string);
 		fclose($handle);
     }
-	var_dump($_POST);
+
 	// $newItem = $_POST['newitem'];
 	// //load file
-	if (isset($_POST["newitem"])){
+	if (!empty($_POST["newitem"])){
 		$item = $_POST["newitem"];
 		array_push($items, $item);
 		save_to_file($filename, $items);
@@ -52,8 +52,8 @@
 ?>
 	</ul>
 		<form method="POST">
-			<input type="text" id="newitem" name="newitem">
-			<input type="submit" value="add">
+			<input type="text" id="newitem" name="newitem" autofocus="autofocus" placeholder="add item">
+			<input type="submit" value="add" >
 		</form>
 </body>
 </html>

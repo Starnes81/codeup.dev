@@ -26,9 +26,7 @@
 		$handle = fopen($filename, 'w');
 		fwrite($handle, $string);
 		fclose($handle);
-
     }
-
 	var_dump($_POST);
 	// $newItem = $_POST['newitem'];
 	// //load file
@@ -37,21 +35,14 @@
 		array_push($items, $item);
 		save_to_file($filename, $items);
 	}
-
-
 	//remove
-	
 	if (isset($_GET['remove'])){
 		unset($items[$_GET['remove']]);
 		save_to_file($filename, $items);
-		
-
 		header("location: todo-list.php");
 		exit;
 	}
-
 ?>
-
 	<h2>TODO List</h2>
 	<ul>
 		<?php foreach ($items as $key => $item) {
@@ -59,14 +50,10 @@
 			echo "<li>$item <a href='?remove=$key'>Remove Item</a></li>";
 } 
 ?>
-
 	</ul>
-	
-
-	<form method="POST">
-		<input type="text" id="newitem" name="newitem">
-		<input type="submit" value="add">
-	</form>
-
+		<form method="POST">
+			<input type="text" id="newitem" name="newitem">
+			<input type="submit" value="add">
+		</form>
 </body>
 </html>

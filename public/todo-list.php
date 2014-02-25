@@ -43,7 +43,6 @@
 	
 	if (isset($_GET['remove'])){
 		unset($items[$_GET['remove']]);
-		$string = implode("\n", $items);
 		save_to_file($filename, $items);
 		
 

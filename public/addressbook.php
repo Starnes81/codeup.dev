@@ -53,7 +53,7 @@ var_dump($_POST);
 		<tr>
 	<? foreach ($address_book as $key => $field) {
 		$newTodo = $key + 1; ?>
-		<?= "<td>" . strip_tags($field) . "</td>";
+		<?= '<td><input id="item1">' . strip_tags($field) . '</td>';
 	} ?>
 			<td></td>
 			<td></td>

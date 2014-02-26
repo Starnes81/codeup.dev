@@ -5,7 +5,15 @@ $address_book = [
     ['Marvel Comics', 'P.O. Box 1527', 'Long Island City', 'NY', '11101'],
     ['LucasArts', 'P.O. Box 29901', 'San Francisco', 'CA', '94129-0901']
 ];
-
+function read_file($filename) {
+	$contents = [];
+	$handle = fopen($filename, "r");
+	while (($data = fgetcsv($handle)) !== FALSE) {
+		$contents[] = $data;
+	}
+	fclose($handle);
+	return $contents;
+}
 
 $filename = ('address_book.csv');
 function file_operation($filename, $address_book){
@@ -15,13 +23,7 @@ function file_operation($filename, $address_book){
 			}
 		fclose($handle);
 	}
-
-
-// 	function save_to_file($filename, $rows) {
-// 	$handle = fopen($filename, 'w');
-// 	fputcsv($handle, $rows);
-// 	fclose($handle);
-// }
+$address_book = read_file('address_book.csv');
 
 file_operation('address_book.csv',$address_book);
 

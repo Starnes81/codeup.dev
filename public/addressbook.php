@@ -7,7 +7,7 @@ $address_book = [
 ];
 
 $filename = ('address_book.csv');
-function open_csv($filename){
+function open_csv($filename,$fields){
 	if(filesize($filename) == 0) {
 			return array();
 		}
@@ -19,20 +19,25 @@ function open_csv($filename){
 	}
 
 
-	function save_to_file($filename, $address_book) {
-	$fields = implode("\n", $address_book);
+	function save_to_file($filename, $rows) {
 	$handle = fopen($filename, 'w');
-	fputcsv($handle, $fields);
+	fputcsv($handle, $rows);
 	fclose($handle);
 }
 
+open_csv('address_book.csv',$address_book);
 
-$address_book = open_csv($filename);
+if (!empty($_POST)){
+	$name = $_POST['name'];
+	$address = $_POST['address'];
+	$city = $_POST['city'];
+	$state = $_POST['state'];
+	$zip = $_POST['zip'];
 
-if (!empty($_POST["item1"])){
-	$item = $_POST["item1"];
-	array_push($address_book, $fields);
-	save_to_file($filename, $fields);
+	$entry = [$name, $address, $city, $state, $zip];
+	array_push($address_book, $entry);
+
+	save_to_file('address_book.csv', $entry);
 }
 
 var_dump($_POST);
@@ -50,40 +55,39 @@ var_dump($_POST);
 	<h2>Address Book</h2>
 
 	<table>
-		<tr>
-	<? foreach ($address_book as $key => $field) {
-		$newTodo = $key + 1; ?>
-		<?= '<td><input id="item1">' . strip_tags($field) . '</td>';
-	} ?>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
+			<? foreach ($address_book as $entry) { ?> 
+				<tr>
+				<? foreach ($entry as $row) { ?>
+					 <td><?= $row ?></td> 
+				<? }
+					
+			}			
+					
+			?>
 		</tr>
 	</table>
 	
 
 	<form method="POST">
 		<p>
-			<label>Enter Name: </label>
-			<input type="text" name="Name" id="item1" placeholder="Enter Name">
+			<label>Name: </label>
+			<input type="text" name="name" id="name" placeholder="Enter Name">
 		</p>
 		<p>
-			<label>Enter Address: </label>
-			<input type="text" name="Adrress" id="item2" placeholder="Enter Address">
+			<label>Address: </label>
+			<input type="text" name="address" id="address" placeholder="Enter Address">
 		</p>
 		<p>
-			<label>Enter City: </label>
-			<input type="text" name="City" id="item3" placeholder="Enter City">
+			<label>City: </label>
+			<input type="text" name="city" id="city" placeholder="Enter City">
 		</p>
 		<p>
-			<label>Enter State: </label>
-			<input type="text" name="State" id="item4" placeholder="Enter State">
+			<label>State: </label>
+			<input type="text" name="state" id="state" placeholder="Enter State">
 		</p>
 		<p>
-			<label>Enter Zip: </label>
-			<input type="text" name="State" id="item5" placeholder="Enter Zip">
+			<label>Zip: </label>
+			<input type="text" name="zip" id="zip" placeholder="Enter Zip">
 		</p>
 		<p>
 			<input type="submit" value="add" >

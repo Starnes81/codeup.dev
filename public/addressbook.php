@@ -6,26 +6,24 @@ $address_book = [
     ['LucasArts', 'P.O. Box 29901', 'San Francisco', 'CA', '94129-0901']
 ];
 
+
 $filename = ('address_book.csv');
-function open_csv($filename,$fields){
-	if(filesize($filename) == 0) {
-			return array();
-		}
-		$handle = fopen($filename, 'c+');
-		foreach ($address_book as $fields) {
-			fputcsv($handle, $fields);
+function file_operation($filename, $address_book){
+		$handle = fopen($filename, 'w');
+		foreach ($address_book as $row) {
+			fputcsv($handle, $row);
 			}
 		fclose($handle);
 	}
 
 
-	function save_to_file($filename, $rows) {
-	$handle = fopen($filename, 'w');
-	fputcsv($handle, $rows);
-	fclose($handle);
-}
+// 	function save_to_file($filename, $rows) {
+// 	$handle = fopen($filename, 'w');
+// 	fputcsv($handle, $rows);
+// 	fclose($handle);
+// }
 
-open_csv('address_book.csv',$address_book);
+file_operation('address_book.csv',$address_book);
 
 if (!empty($_POST)){
 	$name = $_POST['name'];
@@ -37,7 +35,7 @@ if (!empty($_POST)){
 	$entry = [$name, $address, $city, $state, $zip];
 	array_push($address_book, $entry);
 
-	save_to_file('address_book.csv', $entry);
+	file_operation('address_book.csv', $address_book);
 }
 
 var_dump($_POST);
@@ -59,12 +57,11 @@ var_dump($_POST);
 				<tr>
 				<? foreach ($entry as $row) { ?>
 					 <td><?= $row ?></td> 
-				<? }
+					<? }
 					
-			}			
-					
-			?>
-		</tr>
+				} ?>
+
+				</tr>
 	</table>
 	
 

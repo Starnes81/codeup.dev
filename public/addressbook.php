@@ -16,7 +16,7 @@ function read_file($filename) {
 }
 
 $filename = ('address_book.csv');
-function file_operation($filename, $address_book){
+function save_file($filename, $address_book){
 		$handle = fopen($filename, 'w');
 		foreach ($address_book as $row) {
 			fputcsv($handle, $row);
@@ -25,7 +25,7 @@ function file_operation($filename, $address_book){
 	}
 $address_book = read_file('address_book.csv');
 
-file_operation('address_book.csv',$address_book);
+save_file('address_book.csv',$address_book);
 
 if (!empty($_POST)){
 	$name = $_POST['name'];
@@ -39,6 +39,7 @@ if (!empty($_POST)){
 
 	file_operation('address_book.csv', $address_book);
 }
+
 
 var_dump($_POST);
 
@@ -58,10 +59,10 @@ var_dump($_POST);
 			<? foreach ($address_book as $entry) { ?> 
 				<tr>
 				<? foreach ($entry as $row) { ?>
-					 <td><?= $row ?></td> 
-					<? }
-					
-				} ?>
+					 <?= "<td>" . htmlspecialchars(strip_tags($row))  .  "</td>"; 
+					 } ?>
+					<td> <a href='?remove=$key'>Remove Item</a></td>
+				<? } ?>
 
 				</tr>
 	</table>

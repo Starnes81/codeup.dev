@@ -3,7 +3,6 @@
 <? 
 
 $items = [];
-
 $filename = 'todo.txt';
 function open_file ($filename){
 	if(filesize($filename) == 0) {
@@ -26,7 +25,7 @@ function save_to_file($filename, $items) {
 }
 
 
-	
+$items = open_file($filename);	
 
 // //load file
 if (!empty($_POST["newitem"])){
@@ -43,20 +42,32 @@ if (isset($_GET['remove'])){
 	exit;
 }
 
-if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0) {
-	$upload_dir = '/vagrant/sites/codeup.dev/public/uploads/';
-	$new_file = basename($_FILES['file1']['name']);
-	$saved_filename = $upload_dir . $new_file;
-	move_uploaded_file($_FILES['file1']['tmp_name'], $saved_filename);
-    
-    $addFile = open_file($new_file);
-	foreach ($addFile as $key => $item) {
-        array_push($items, $addFile[$key]);
-        save_to_file($filename, $items);
+if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0){
+	if ($_FILES['file1']['type'] != 'text/plain') {
+		$errorMsg = 'Invalid Filw type';
+		echo $errorMsg;
+	} else {
+		$upload_dir = '/vagrant/sites/codeup.dev/public/uploads/';
+		$new_file = basename($_FILES['file1']['name']);
+		$saved_filename = $upload_dir . $new_file;
+		move_uploaded_file($_FILES['file1']['tmp_name'], $saved_filename);
+	    $addFile = open_file($_FILES['file1']['name']);
 
+	    if (isset($_POST['over1']) && $_POST['over1'] == TRUE){
+	    	$items = $addFile;
+	    }else{
+			foreach ($addFile as $key => $item) {
+	        	array_push($items, $addFile[$key]);
+	    	}
+		} 
+    save_to_file($filename, $items);    
     }
-
 }
+    
+
+var_dump($_POST);
+var_dump($items);
+var_dump(isset($_POST['over1']));
 
 
 // var_dump($_FILES);
@@ -71,15 +82,17 @@ if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0) {
 <h2>TODO List</h2>
 <ul>
 	<? foreach ($items as $key => $item) {
-		$newTodo = $key + 1;
-		echo "<li>$item <a href='?remove=$key'>Remove Item</a></li>";
-} 
+		$newTodo = $key + 1; ?>
+		<?= "<li>" . htmlspecialchars(strip_tags($item)) . " <a href='?remove=$key'>Remove Item</a></li>";
+} ?>
 
-		if (isset($saved_filename)) {
-		echo "<p>You can download your file <a href='/uploads/{$new_file}'>here</a>.</p>";
+		<? if (isset($saved_filename)) { ?>
+		<?= "<p>You can download your file <a href='/uploads/{$new_file}'>here</a>.</p>";
 }
- 
 ?>
+ 		<? if (!empty($errorMsg))  { ?>
+ 		<p><?= $errorMsg; ?></p>
+ 		<? } ?>
 </ul>
 	<form method="POST" enctype="multipart/form-data" action="/todo-list.php">
 		<p>
@@ -92,6 +105,9 @@ if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0) {
 		</p>
 		<p>
 		<input type="submit" value="Upload" >
+		<form method="POST">
+		<label><input type="checkbox" id="over1" name="over1" value="checked">Over Write</label>
+		</form>
 		</p>
 	</form>
 </body>

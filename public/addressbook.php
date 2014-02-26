@@ -40,8 +40,14 @@ if (!empty($_POST)){
 	file_operation('address_book.csv', $address_book);
 }
 
+if (isset($_GET['remove'])){
+	unset($address_book[$_GET['remove']]);
+	save_file($filename, $address_book);
+	
+}
 
 var_dump($_POST);
+var_dump($_GET);
 
 ?>
 
@@ -61,7 +67,7 @@ var_dump($_POST);
 				<? foreach ($entry as $row) { ?>
 					 <?= "<td>" . htmlspecialchars(strip_tags($row))  .  "</td>"; 
 					 } ?>
-					<td> <a href='?remove=$key'>Remove Item</a></td>
+					<td> <a href='?remove=<?=$row ?>'>Remove Item</a></td>
 				<? } ?>
 
 				</tr>

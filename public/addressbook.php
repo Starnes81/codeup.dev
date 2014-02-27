@@ -4,7 +4,7 @@ class AddressDataStore {
 
 	public $filename = '';
 
-	function __construct($filename ='address_book.csv'){
+	function __construct($filename = 'address_book.csv'){
 		$this->filename = $filename;
 	}
 
@@ -31,22 +31,30 @@ class AddressDataStore {
 
 $book = new AddressDataStore();
 
-$address_book = $book->read_file($book->filename);
+$address_book = $book->read_file();
 
 
 $book->save_file($address_book);
 
+$errorMessage =[];
+
 if (!empty($_POST)){
-	$name = $_POST['name'];
-	$address = $_POST['address'];
-	$city = $_POST['city'];
-	$state = $_POST['state'];
-	$zip = $_POST['zip'];
+	$entry =[];
+	$entry['name'] = $_POST['name'];
+	$entry['address'] = $_POST['address'];
+	$entry['city'] = $_POST['city'];
+	$entry['state'] = $_POST['state'];
+	$entry['zip'] = $_POST['zip'];
 
-	$entry = [$name, $address, $city, $state, $zip];
-	array_push($address_book, $entry);
-
+	foreach ($entry as $key => $value){
+		if (empty($value)) {
+			array_push($errorMessage, "$key must have value.");
+		}
+	}
+	if(empty($errorMessage)) {
+	array_push($address_book, array_values($entry));
 	$book->save_file($address_book);
+	}
 }
 
 if (isset($_GET['remove'])){
@@ -55,6 +63,32 @@ if (isset($_GET['remove'])){
 	
 }
 
+if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0){
+	if ($_FILES['file1']['type'] != 'text/csv') {
+		$errorMsg = 'Invalid File type';
+		echo $errorMsg;
+	} else {
+		$upload_dir = '/vagrant/sites/codeup.dev/public/uploads/';
+		$new_file = basename($_FILES['file1']['name']);
+		$saved_filename = $upload_dir . $new_file;
+		move_uploaded_file($_FILES['file1']['tmp_name'], $saved_filename);
+
+	    $newfile = new AddressDataStore($saved_filename);
+
+	    $addFile = $newfile->read_file();
+
+	    if (isset($_POST['over1']) && $_POST['over1'] == TRUE){
+	    	$address_book = $addFile;
+	    }else{
+			foreach ($addFile as $key => $item) {
+	        	array_push($address_book, $addFile[$key]);
+	    	}
+		} 
+    $book->save_file($address_book);    
+    }
+}
+
+var_dump($_FILES);
 var_dump($_POST);
 var_dump($_GET);
 
@@ -81,8 +115,7 @@ var_dump($_GET);
 				</tr>
 	</table>
 	
-
-	<form method="POST">
+	<form method="POST" enctype="multipart/form-data" action="/addressbook.php">
 		<p>
 			<label>Name: </label>
 			<input type="text" name="name" id="name" placeholder="Enter Name">
@@ -105,7 +138,15 @@ var_dump($_GET);
 		</p>
 		<p>
 			<input type="submit" value="add" >
-	</form>
+		</p>
+		<p>
+			<label for="file1">add file:</label>
+			<input type="file" id="file1" name="file1" >
+		</p>
+		<P>
+			<input type="submit" value="Upload">
+			<label><input type="checkbox" id="over1" name="over1" value="checked">Over Write</label>
+		</P>
 
 </body>
 </html>

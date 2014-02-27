@@ -4,6 +4,10 @@ class AddressDataStore {
 
 	public $filename = '';
 
+	function __construct($filename ='address_book.csv'){
+		$this->filename = $filename;
+	}
+
 	function read_file() {
 		$contents = [];
 		$handle = fopen($this->filename, "r");
@@ -27,8 +31,6 @@ class AddressDataStore {
 
 $book = new AddressDataStore();
 
-
-$book->filename = 'address_book.csv';
 $address_book = $book->read_file($book->filename);
 
 

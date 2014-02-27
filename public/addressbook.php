@@ -1,31 +1,38 @@
 <?php
 
-$address_book = [
-	['The White House', '1600 Pennsylvania Avenue NW', 'Washington', 'DC', '20500'],
-    ['Marvel Comics', 'P.O. Box 1527', 'Long Island City', 'NY', '11101'],
-    ['LucasArts', 'P.O. Box 29901', 'San Francisco', 'CA', '94129-0901']
-];
-function read_file($filename) {
-	$contents = [];
-	$handle = fopen($filename, "r");
-	while (($data = fgetcsv($handle)) !== FALSE) {
-		$contents[] = $data;
+class AddressDataStore {
+
+	public $filename = '';
+
+	function read_file() {
+		$contents = [];
+		$handle = fopen($this->filename, "r");
+		while (($data = fgetcsv($handle)) !== FALSE) {
+			$contents[] = $data;
+		}
+		fclose($handle);
+		return $contents;
 	}
-	fclose($handle);
-	return $contents;
+
+	function save_file($address_book){
+			$handle = fopen($this->filename, 'w');
+			foreach ($address_book as $row) {
+				fputcsv($handle, $row);
+				}
+			fclose($handle);
+		}
+
+	
 }
 
-$filename = ('address_book.csv');
-function save_file($filename, $address_book){
-		$handle = fopen($filename, 'w');
-		foreach ($address_book as $row) {
-			fputcsv($handle, $row);
-			}
-		fclose($handle);
-	}
-$address_book = read_file('address_book.csv');
+$book = new AddressDataStore();
 
-save_file('address_book.csv',$address_book);
+
+$book->filename = 'address_book.csv';
+$address_book = $book->read_file($book->filename);
+
+
+$book->save_file($address_book);
 
 if (!empty($_POST)){
 	$name = $_POST['name'];
@@ -37,12 +44,12 @@ if (!empty($_POST)){
 	$entry = [$name, $address, $city, $state, $zip];
 	array_push($address_book, $entry);
 
-	save_file('address_book.csv', $address_book);
+	$book->save_file($address_book);
 }
 
 if (isset($_GET['remove'])){
 	unset($address_book[$_GET['remove']]);
-	save_file($filename, $address_book);
+	$book->save_file($address_book);
 	
 }
 

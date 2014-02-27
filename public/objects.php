@@ -7,14 +7,17 @@ class Converstation {
 
 	public $lastname = '';
 
-	function say_hello($newline = FALSE) //method says hello to name
-	{
-		$greeting "Hello {$this->$name} {$this->$lastname";
+	function say_hello($newline = FALSE){
+		$greeting = "Hello {$this->$name} {$this->$lastname}";
 		if ($newline == FALSE) {
-			return $greeting;
+			return "<p>{$greeting}</p>;";
 		} else {
 			return $greeting . PHP_EOL;
 		}
+	}
+
+	function say_Goodbye() {
+		return "Goodbye {$this->name} {$this->lastname}";
 	}
 }
 
@@ -33,10 +36,12 @@ echo $chat->say_hello();
 <!DOCTYPE html>
 <html>
 <head>
-	<title><?= $chat->say_hello(); ?></title>
+	<title><?= $chat->say_hello(FALSE); ?></title>
 </head>
 <body>
-	<p><?= $chat->say_hello(); ?></p>
+	<?= $chat->say_hello(); ?>
+	<hr>
+	<p><?= $chat->say_Goodbye(); ?></p>
 
 </body>
 </html>

@@ -37,7 +37,7 @@ if (!empty($_POST)){
 	$entry = [$name, $address, $city, $state, $zip];
 	array_push($address_book, $entry);
 
-	file_operation('address_book.csv', $address_book);
+	save_file('address_book.csv', $address_book);
 }
 
 if (isset($_GET['remove'])){
@@ -62,12 +62,11 @@ var_dump($_GET);
 	<h2>Address Book</h2>
 
 	<table>
-			<? foreach ($address_book as $entry) { ?> 
+			<? foreach ($address_book as $key => $row) { ?> 
 				<tr>
-				<? foreach ($entry as $row) { ?>
-					 <?= "<td>" . htmlspecialchars(strip_tags($row))  .  "</td>"; 
-					 } ?>
-					<td> <a href='?remove=<?=$row ?>'>Remove Item</a></td>
+				<? foreach ($row as $entry) { ?>
+					 <?= "<td>" . htmlspecialchars(strip_tags($entry))  .  "</td>"; } ?>
+					<td> <a href='?remove=<?=$key ?>'>Remove Item</a></td>
 				<? } ?>
 
 				</tr>

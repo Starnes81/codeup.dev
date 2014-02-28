@@ -2,12 +2,12 @@
 
 require_once('address_data_store.php');
 
-$book = new AddressDataStore();
+$book = new AddressDataStore ();
 
-$address_book = $book->read_file();
+$address_book = $book->read_csv();
 
-
-$book->save_file($address_book);
+ 
+$book->write_csv($address_book);
 
 $errorMessage =[];
 
@@ -26,13 +26,13 @@ if (!empty($_POST)){
 	}
 	if(empty($errorMessage)) {
 	array_push($address_book, array_values($entry));
-	$book->save_file($address_book);
+	$book->write_csv($address_book);
 	}
 }
 
 if (isset($_GET['remove'])){
 	unset($address_book[$_GET['remove']]);
-	$book->save_file($address_book);
+	$book->write_csv($address_book);
 	
 }
 
@@ -48,7 +48,7 @@ if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0){
 
 	    $newfile = new AddressDataStore($saved_filename);
 
-	    $addFile = $newfile->read_file();
+	    $addFile = $newfile->read_csv();
 
 	    if (isset($_POST['over1']) && $_POST['over1'] == TRUE){
 	    	$address_book = $addFile;
@@ -57,7 +57,7 @@ if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0){
 	        	array_push($address_book, $addFile[$key]);
 	    	}
 		} 
-    $book->save_file($address_book);    
+    $book->write_csv($address_book);    
     }
 }
 

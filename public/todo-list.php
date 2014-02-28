@@ -1,43 +1,51 @@
-<!DOCTYPE html>
 
 <? 
 
-$items = [];
-$filename = 'todo.txt';
-function open_file ($filename){
-	if(filesize($filename) == 0) {
-		return array();
-	}
 
-	$handle = fopen($filename, 'r');
-	$contents = fread($handle, filesize($filename));
-	$items = explode("\n", $contents);
-	fclose($handle);
-	return $items;
-}
+require_once('filestore.php');
 
-//fiel operation 
-function save_to_file($filename, $items) {
-	$string = implode("\n", $items);
-	$handle = fopen($filename, 'w');
-	fwrite($handle, $string);
-	fclose($handle);
-}
+$todo = new filestore ();
 
 
-$items = open_file($filename);	
+$items = $todo->read_lines();
+
+ 
+$todo->write_lines();
+
+// function open_file ($filename){
+// 	if(filesize($filename) == 0) {
+// 		return array();
+// 	}
+
+// 	$handle = fopen($filename, 'r');
+// 	$contents = fread($handle, filesize($filename));
+// 	$items = explode("\n", $contents);
+// 	fclose($handle);
+// 	return $items;
+// }
+
+// //fiel operation 
+// function save_to_file($filename, $items) {
+// 	$string = implode("\n", $items);
+// 	$handle = fopen($filename, 'w');
+// 	fwrite($handle, $string);
+// 	fclose($handle);
+// }
+
+
+// $items = open_file($this->filename);	
 
 // //load file
 if (!empty($_POST["newitem"])){
 	$item = $_POST["newitem"];
 	array_push($items, $item);
-	save_to_file($filename, $items);
+	save_to_file($this->filename, $items);
 }
 
 //remove
 if (isset($_GET['remove'])){
 	unset($items[$_GET['remove']]);
-	save_to_file($filename, $items);
+	save_to_file($this->filename, $items);
 	header("Location: todo-list.php");
 	exit;
 }
@@ -51,7 +59,7 @@ if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0){
 		$new_file = basename($_FILES['file1']['name']);
 		$saved_filename = $upload_dir . $new_file;
 		move_uploaded_file($_FILES['file1']['tmp_name'], $saved_filename);
-	    $addFile = open_file($_FILES['file1']['name']);
+	    $addFile = $this->read_file($_FILES['file1']['name']);
 
 	    if (isset($_POST['over1']) && $_POST['over1'] == TRUE){
 	    	$items = $addFile;
@@ -60,19 +68,18 @@ if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0){
 	        	array_push($items, $addFile[$key]);
 	    	}
 		} 
-    save_to_file($filename, $items);    
+    $this->write_lines($this->filename, $items);    
     }
 }
     
 
 var_dump($_POST);
-var_dump($items);
 var_dump(isset($_POST['over1']));
 
 
-// var_dump($_FILES);
 ?>
 
+<!DOCTYPE html>
 <html>
 <head>
 	<title>TODO List</title>

@@ -1,8 +1,10 @@
 <?php
 
+require_once('filestore.php');
+
+class AddressDataStore extends Filestore {
 
 
-class AddressDataStore {
 
 	public $filename = '';
 
@@ -10,7 +12,7 @@ class AddressDataStore {
 		$this->filename = $filename;
 	}
 
-	function read_file() {
+	function read_csv() {
 		$contents = [];
 		$handle = fopen($this->filename, "r");
 		while (($data = fgetcsv($handle)) !== FALSE) {
@@ -20,7 +22,7 @@ class AddressDataStore {
 		return $contents;
 	}
 
-	function save_file($address_book){
+	function write_csv($address_book){
 			$handle = fopen($this->filename, 'w');
 			foreach ($address_book as $row) {
 				fputcsv($handle, $row);

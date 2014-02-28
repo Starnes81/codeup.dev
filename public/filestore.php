@@ -2,18 +2,21 @@
 
 class Filestore {
 
-    public $filename = '';
+    public $filename = 'todo.txt';
+
+    public $items = array();
 
     function __construct($filename = '') {
-    	if(!empty($filename))
+    	if(!empty($filename)){
         // Sets $this->filename
-        $this->filename = $filename;
+        		$this->filename = $filename;
+    		}
     }
 
     /**
      * Returns array of lines in $this->filename
      */
-    function read_lines() {
+    public function read_lines() {
     	if(filesize($this->filename) == 0) {
 		return array();
 			}
@@ -24,20 +27,30 @@ class Filestore {
 			return $items;
     }
 
-    /**
-     * Writes each element in $array to a new line in $this->filename
-     */
-    function write_lines($array) {
+    public function write_lines($items) {
+    	var_dump($items);
     	$string = implode("\n", $items);
 		$handle = fopen($this->filename, 'w');
 		fwrite($handle, $string);
 		fclose($handle);
     }
 
+     /**
+     * Writes each element in $array to a new line in $this->filename
+     */
+
+	public function get_list() {
+		if (filesize($this->filename) > 0) {
+			return $this->read_lines($this->filename);
+		} else {
+			return array();
+		}
+	}
+
     /**
      * Reads contents of csv $this->filename, returns an array
      */
-    function read_csv() {
+    public function read_csv() {
 		$contents = [];
 		$handle = fopen($this->filename, "r");
 		while (($data = fgetcsv($handle)) !== FALSE) {
@@ -50,7 +63,7 @@ class Filestore {
     /**
      * Writes contents of $array to csv $this->filename
      */
-    function write_csv($address_book) {
+    public function write_csv($address_book) {
 			$handle = fopen($this->filename, 'w');
 			foreach ($address_book as $row) {
 				fputcsv($handle, $row);

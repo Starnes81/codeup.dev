@@ -1,2 +1,3 @@
-<h1>stuff</h1>
-stuff
+Remember to check for spelling
+Check spelling
+Debug all the code

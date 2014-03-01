@@ -2,7 +2,7 @@
 
 require_once('address_data_store.php');
 
-$book = new AddressDataStore ();
+$book = new AddressDataStoreLower ();
 
 $address_book = $book->read_csv();
 
@@ -46,7 +46,7 @@ if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0){
 		$saved_filename = $upload_dir . $new_file;
 		move_uploaded_file($_FILES['file1']['tmp_name'], $saved_filename);
 
-	    $newfile = new AddressDataStore($saved_filename);
+	    $newfile = new AddressDataStoreLower($saved_filename);
 
 	    $addFile = $newfile->read_csv();
 

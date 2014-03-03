@@ -15,16 +15,18 @@ $items = $todo->read();
 //load file
 if (!empty($_POST["newitem"])){
 	$item = $_POST["newitem"];
+	if (strlen($item) > 240) {
+		throw new Exception('Must be less than 240 characters');
+	}
 	array_push($items, $item);
-	$todo->write_lines($items);
+	$todo->write($items);
 }
-
 
 
 //remove
 if (isset($_GET['remove'])){
 	unset($items[$_GET['remove']]);
-	$todo->write_lines($items);
+	$todo->write($items);
 	header("Location: todo-list.php");
 	exit;
 }
@@ -42,7 +44,7 @@ if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0){
 		$saved_filename = $upload_dir . $new_file;
 		move_uploaded_file($_FILES['file1']['tmp_name'], $saved_filename);
 		$addFile = new Filestore($saved_filename);
-		$newitems = $addFile->read_lines();
+		$newitems = $addFile->read();
 	  
 	    if (isset($_POST['over1']) && $_POST['over1'] == TRUE){
 	    	$items = $newitems;
@@ -51,7 +53,7 @@ if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0){
 	        	array_push($items, $item);
 	    	}
 		} 
-    $todo->write_lines($items);    
+    $todo->write($items);    
     }
 }
     

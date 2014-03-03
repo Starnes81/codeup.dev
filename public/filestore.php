@@ -32,9 +32,9 @@ class Filestore {
 
     public function write($items){
     	if ($this->is_csv == FALSE){
-    		$this->write_lines();
+    		return $this->write_lines($items);
     	} else {
-    		$this->write_csv($items);
+    		return $this->write_csv($items);
     	}
     }
     /**

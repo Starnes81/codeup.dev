@@ -20,8 +20,8 @@ if (!empty($_POST)){
 	$entry['zip'] = $_POST['zip'];
 
 	foreach ($entry as $key => $value){
-		if (empty($value)) {
-			array_push($errorMessage, "$key must have value.");
+		if (strlen($value) > 125) {
+			throw new Exception ("Entry must be less than 125 characters");
 		}
 	}
 	if(empty($errorMessage)) {

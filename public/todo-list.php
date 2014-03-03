@@ -7,32 +7,10 @@ require_once('filestore.php');
 $todo = new Filestore ();
 
 
-$items = $todo->read_lines();
+$items = $todo->read();
 
 
 
-// function open_file ($filename){
-// 	if(filesize($filename) == 0) {
-// 		return array();
-// 	}
-
-// 	$handle = fopen($filename, 'r');
-// 	$contents = fread($handle, filesize($filename));
-// 	$items = explode("\n", $contents);
-// 	fclose($handle);
-// 	return $items;
-// }
-
-// //fiel operation 
-// function save_to_file($filename, $items) {
-// 	$string = implode("\n", $items);
-// 	$handle = fopen($filename, 'w');
-// 	fwrite($handle, $string);
-// 	fclose($handle);
-// }
-
-
-// $items = open_file($this->filename);	
 
 //load file
 if (!empty($_POST["newitem"])){

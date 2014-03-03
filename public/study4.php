@@ -1,42 +1,46 @@
 <?php
 
+class Conversation {
 
-class Converstation {
+	public $name = '';
 
-	public $name = ''; //property holds name
+	function __construct($name = '') {
+		$this->name = $name;
+	}
 
-	public $lastname = '';
+	function say_hello($new_line = FALSE){
 
-	function say_hello($newline = FALSE) //method says hello to name
-	{
-		$greeting "Hello {$this->$name} {$this->$lastname";
-		if ($newline == FALSE) {
-			return $greeting;
-		} else {
-			return $greeting . PHP_EOL;
-		}
+		$greeting = "Hello {$this->name}";
+
+		return $new_line == TRUE ? "$gretting\n" : $gretting;
+
 	}
 }
 
+class LocationConversation extends Conversation {
 
-$chat = new Conversation();
+	public $location ='';
 
+	function say_hello($new_line = FALSE) {
 
-$chat->name = 'Codeup';
-$chat->lastname = 'Cohort';
+		$greeting = "Hi there {$this->name}";
 
+		return $new_line == TRUE ? "$greeting\n" : $greeting;
+	}
 
-echo $chat->say_hello();
-?>
+	function say_hello_from_location($new_line = FALSE) {
 
+		$greeting = "{$this->say_hello()} from {$this->location}";
 
-<!DOCTYPE html>
-<html>
-<head>
-	<title><?= $chat->say_hello(); ?></title>
-</head>
-<body>
-	<p><?= $chat->say_hello(); ?></p>
+		return $new_line == TRUE ? "$greeting\n" : $greeting;
+	}
 
-</body>
-</html>
+}
+
+$local_chat = new LocationConversation('Codeup');
+
+echo $local_chat->say_hello(TRUE);
+
+$local_chat->location = 'San Antonio';
+
+echo $local_chat->say_hello_from_location(TRUE);

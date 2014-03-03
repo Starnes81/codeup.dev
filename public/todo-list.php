@@ -13,13 +13,18 @@ $items = $todo->read();
 
 
 //load file
+
 if (!empty($_POST["newitem"])){
+	try {
 	$item = $_POST["newitem"];
 	if (strlen($item) > 240) {
 		throw new Exception('Must be less than 240 characters');
 	}
 	array_push($items, $item);
 	$todo->write($items);
+
+		} catch (Exception $e){
+	}
 }
 
 
@@ -57,6 +62,7 @@ if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0){
     }
 }
     
+
 ?>
 
 <!DOCTYPE html>

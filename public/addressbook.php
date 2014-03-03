@@ -12,6 +12,7 @@ $book->write($address_book);
 $errorMessage =[];
 
 if (!empty($_POST)){
+	try {
 	$entry =[];
 	$entry['name'] = $_POST['name'];
 	$entry['address'] = $_POST['address'];
@@ -21,12 +22,14 @@ if (!empty($_POST)){
 
 	foreach ($entry as $key => $value){
 		if (strlen($value) > 125) {
-			throw new Exception ("Entry must be less than 125 characters");
+			throw new Exception ("$key must be less than 125 characters");
 		}
 	}
 	if(empty($errorMessage)) {
 	array_push($address_book, array_values($entry));
 	$book->write($address_book);
+	}	
+		} catch (Exception $e) {
 	}
 }
 

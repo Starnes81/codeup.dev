@@ -83,7 +83,7 @@ class Filestore {
     /**
      * Writes contents of $array to csv $this->filename
      */
-    public function write_csv($address_book) {
+    private function write_csv($address_book) {
 			$handle = fopen($this->filename, 'w');
 			foreach ($address_book as $row) {
 				fputcsv($handle, $row);

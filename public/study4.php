@@ -12,7 +12,7 @@ class Conversation {
 
 		$greeting = "Hello {$this->name}";
 
-		return $new_line == TRUE ? "$gretting\n" : $gretting;
+		return $new_line == TRUE ? "<p>$gretting</p>" : $gretting;
 
 	}
 }

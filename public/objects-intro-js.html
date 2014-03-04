@@ -10,7 +10,7 @@
 	person.lastname = 'Starnes';
 	//person function
 	person.sayHello = function () { 
-		console.log('Hello ' + person.firstname + person.lastname); 
+		alert('Hello from ' + this.firstname + this.lastname); 
 	};
 	//call function
 	person.sayHello();

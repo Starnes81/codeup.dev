@@ -15,7 +15,6 @@ $book->write($address_book);
 $errorMessage =[];
 
 if (!empty($_POST)){
-	try {
 	$entry =[];
 	$entry['name'] = $_POST['name'];
 	$entry['address'] = $_POST['address'];
@@ -32,8 +31,7 @@ if (!empty($_POST)){
 	array_push($address_book, array_values($entry));
 	$book->write($address_book);
 	}	
-		} catch (Exception $e) {
-	}
+
 }
 
 if (isset($_GET['remove'])){
@@ -66,6 +64,12 @@ if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0){
     $book->write($address_book);    
     }
 }
+
+	try { $todo = new Filestore ();
+		} catch (InvalidInputException $e){
+			Echo $e->getMessage();
+			exit(0);
+	}
 
 var_dump($_FILES);
 var_dump($_POST);

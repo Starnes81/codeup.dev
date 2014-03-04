@@ -9,19 +9,21 @@ $todo = new Filestore ();
 
 $items = $todo->read();
 
-
+class InvalidInputException extends Exception {
+	
+}
 
 
 //load file
 
 if (!empty($_POST["newitem"])){
 	try {
-	$item = $_POST["newitem"];
-	if (strlen($item) > 240) {
-		throw new Exception('Must be less than 240 characters');
-	}
-	array_push($items, $item);
-	$todo->write($items);
+		$item = $_POST["newitem"];
+		if (strlen($item) > 240) {
+			throw new InvalidInputException('$item be less than 240 characters');
+		}
+		array_push($items, $item);
+		$todo->write($items);
 
 		} catch (Exception $e){
 	}

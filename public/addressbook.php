@@ -6,6 +6,9 @@ $book = new AddressDataStore('address_book.csv');
 
 $address_book = $book->read();
 
+class InvalidInputException extends Exception {
+	
+}
  
 $book->write($address_book);
 
@@ -22,7 +25,7 @@ if (!empty($_POST)){
 
 	foreach ($entry as $key => $value){
 		if (strlen($value) > 125) {
-			throw new Exception ("$key must be less than 125 characters");
+			throw new InvalidInputException ("$key must be less than 125 characters");
 		}
 	}
 	if(empty($errorMessage)) {

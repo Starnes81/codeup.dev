@@ -38,8 +38,7 @@ if (isset($_GET['remove'])){
 
 
 if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0){
-	var_dump($_FILES);
-	var_dump($_POST);
+
 	if ($_FILES['file1']['type'] != 'text/plain') {
 		$errorMsg = 'Invalid Filw type';
 		echo $errorMsg;
@@ -74,10 +73,13 @@ if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0){
 <html>
 <head>
 	<title>TODO List</title>
+	<link rel="stylesheet" href="/css/site.css">
 </head>
 <body>
+	<link href='http://fonts.googleapis.com/css?family=Cambo' rel='stylesheet' type='text/css'>
+	<div id="container">
 
-<h2>TODO List</h2>
+<h1>TODO List</h1>
 <ul>
 	<? foreach ($items as $key => $item) {
 		$newTodo = $key + 1; ?>
@@ -108,5 +110,6 @@ if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0){
 		</form>
 		</p>
 	</form>
+</div>
 </body>
 </html>

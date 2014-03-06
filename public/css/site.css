@@ -3,6 +3,34 @@ this content is stored in a file named "site.css"
 in a directory named "css" in the web root 
 */
 
-.fancy-header {
-    color: blue;
+#container {
+	background-color: #ABA6A6;
+	border-color: #00000;
+	border-width: 2px;
+	text-align: center;
+	border-radius: 12px;
+
 }
+title {
+	text-decoration: underline;
+}
+
+h1 {
+    color: #BA2B18;
+    text-decoration: underline;
+    
+}
+
+html {
+	background-image: url(/img/navy_blue.png);
+}
+
+ul {
+	list-style: circle;
+	color: #FFFFFF;
+	text-align: left;
+	margin-left: 500px;
+	font-size: 1.5em;
+	font-family: 'Cambo', serif; 
+}
+

@@ -6,11 +6,12 @@ in a directory named "css" in the web root
 #container {
 	background-color: #ABA6A6;
 	border-color: #00000;
-	border-width: 2px;
+	border-width: 5px;
 	text-align: center;
 	border-radius: 12px;
 
 }
+
 title {
 	text-decoration: underline;
 }
@@ -20,6 +21,15 @@ h1 {
     text-decoration: underline;
     
 }
+a {
+	color: blue;
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+
+
 
 html {
 	background-image: url(/img/navy_blue.png);

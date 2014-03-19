@@ -2,39 +2,50 @@
 <html>
 <head>
 	<title>jQuery Study</title>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+ 
+<!-- Optional theme -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+ 
+<!-- Latest compiled and minified JavaScript -->
+<!-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script> -->
+
 </head>
 <body>
 	<script src="/js/jquery.js"></script>
 	<script type="text/javascript">
 
 	$(document).ready(function() {
-    		var contents = $('#discrip').html();
-    		alert(contents);
+    		$('#discrip').html();
+    		 $('.codeup').css('border', '1px solid #F00');
+    		
+
+    		
     	});
 	
-	$(document).ready(function() {
-    		var contents = $('#discrip2').html();
-    		alert(contents);
-    	});
+
 
 	</script>
 
-	<h1 class="title">jQuery Study</h1>
+	<div class="container">
+		<h1 class="title">jQuery Study</h1>
 
-	<div>
-		<p id="discrip">Using jQuery selectors to modify html code. We will be accessing ID and CLASS the following:</p>
+		<div>
+			<p id="codeup">Using jQuery selectors to modify html code. We will be accessing ID and CLASS the following:</p>
+		</div>
+
+		<div >
+			<ul id="discrip2">
+				<li class="codeup">h1</li>
+				<li >div</li>
+				<li >p</li>
+				<li >ul</li>
+				<li class="codeup">li</li>
+			</ul>
+		</div>
 	</div>
-
-	<div >
-		<ul id="discrip2">
-			<li id="stuff">h1</li>
-			<li id="stuff">div</li>
-			<li id="stuff">p</li>
-			<li id="stuff">ul</li>
-			<li id="stuff">li</li>
-		</ul>
-	</div>
-
 
 
 </body>

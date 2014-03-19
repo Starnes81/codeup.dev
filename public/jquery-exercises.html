@@ -15,41 +15,48 @@
 </head>
 <body>
 	<script src="/js/jquery.js"></script>
-	<script type="text/javascript">
-
-	$(document).ready(function() {
-    		
-    		 $('.liMod').css('font-size', '20px');
-    		 $('.container').css('background-color', '#FF0');
-    		 var contents = $('#codeup');
-    				alert(contents.html());
-    		
-
-    		
-    	});
 	
-
-
-	</script>
-
-	<div >
-		<h1 id="codeup"class="container">jQuery Study</h1>
+	<div class="container">
+		<h1 id="codeup" class="clickable">jQuery Study</h1>
 
 		<div>
-			<p class="container">Using jQuery selectors to modify html code. We will be accessing ID and CLASS the following:</p>
+			<p class="clickable">Using jQuery selectors to modify html code. We will be accessing ID and CLASS the following:</p>
 		</div>
 
 		<div >
-			<ul class="container">
-				<li class="liMod">h1</li>
-				<li class="liMod">div</li>
-				<li class="liMod">p</li>
-				<li class="liMod">ul</li>
-				<li class="liMod">li</li>
+			<ul class="clickable">
+				<li>h1</li>
+				<li>div</li>
+				<li>p</li>
+				<li>ul</li>
+				<li>li</li>
 			</ul>
 		</div>
 	</div>
 
+<script type="text/javascript">
+
+	    $('h1').click(function() {
+                    $(this).css('background-color', '#FF0');
+            }    	
+	     );
+	    $('p').dblclick(function() {
+                     $(this).css('font-size', '18px')
+            }
+	     );
+	    $('li').hover(function() {
+            $(this).css('color', '#F00');
+        },
+        			  function() {
+            $(this).css('color', '#000');
+	        }
+	    );
+
+               
+	
+
+
+	</script>
 
 </body>
 </html>

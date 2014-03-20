@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Whack</title>
+	<style type="text/css">
+	
+
+	</style>
+</head>
+<body>
+	
+	<div>
+		<img id="red1" src="/img/redPanda.png">
+	</div>
+	<script src="/js/jquery.js"></script>
+	<script type="text/javascript">
+
+		$('div').click(function () {
+			$('#red1').fadeToggle(400);
+				setTimeout(function() {
+					$('#red1').fadeToggle(400);
+				}, 200);
+		
+		});
+
+
+		
+
+	</script>
+
+</body>
+</html>

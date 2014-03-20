@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>FAQ - Arches National Park</title>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+ 
+<!-- Optional theme -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+ 
+<!-- Latest compiled and minified JavaScript -->
+<!-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script> -->
+	<style type="text/css">
+
+	.invisable {
+		display: none;
+	}
+
+	</style>
+</head>
+<body>
+	<script src="/js/jquery.js"></script>
+	
+	<div class="container">
+		<h1 id="codeup" class="clickable">FAQ - Arches National Park</h1>
+
+		
+
+		<div >
+			<dl>
+				<dt> 1. Can I reserve a campsite?  </dt>
+					<dd>Yes. In fact, from March through October, individual sites at Devils Garden Campground must be 		reserved in advance. </dd>
+				<dt> 2. What facilities does the campground have? </dt>
+					<dd>Devils Garden has 52 sites with fire rings, picnic tables, bathrooms and running water (no showers)	   . RV Hookups are not available. </dd>
+				<dt> 3. Can I backpack in Arches? </dt>
+					<dd>Yes, although there just a few areas where backpacking is allowed. </dd>
+				<dt> 4. What about winter camping? </dt>
+					<dd>During the winter (November 1 through February 28), 24 campsites are available on a first-come, 	first-served basis. </dd>
+				<dt> 5. What's the maximum RV length in the campground? </dt>
+					<dd>Some sites will accommodate RVs up to 30 feet long. </dd>
+				<dt> 6. When was Arches established? </dt>
+					<dd>On April 12, 1929, Arches became a National Monument.
+						On November 12, 1971, Arches became a National Park. </dd>
+				<dt> 7. How big is the park? </dt>
+					<dd>76,519 acres or 119 square miles. </dd>
+				<dt> 8. How many arches are in the park? </dt>
+					<dd>No one knows for sure. Over 2,000 have been recorded. Some may have fallen and new arches may yet be forming. </dd>
+				<dt> 9. What is the largest arch? What is the tallest arch? </dt>
+					<dd>The light opening beneath Landscape Arch is 306 feet (93.3 meters) across. Double Arch South has a 	   vertical light opening of 144 feet (43.8 meters). </dd>
+				<dt>10. How many visitors come to Arches every year? </dt>
+					<dd>In 2010, the park received over one million visitors. </dd>	
+			</dl>
+		</div>
+
+		
+			<h3>Arches</h3>
+			<ul> 
+			    <li>Linux</li>
+			    <li>Apache</li>
+			    <li>MySQL</li>
+			    <li>PHP</li>
+			    <li>Javascript</li>
+			</ul>
+			<h3>Badlands</h3>
+			<ul> 
+			    <li>Linux</li>
+			    <li>Apache</li>
+			    <li>MySQL</li>
+			    <li>PHP</li>
+			    <li>Javascript</li>
+			</ul>
+			<h3>Big Bend</h3>
+			<ul> 
+			    <li>Linux</li>
+			    <li>Apache</li>
+			    <li>MySQL</li>
+			    <li>PHP</li>
+			    <li>Javascript</li>
+			</ul>
+		
+
+
+	</div>
+
+
+
+<script type="text/javascript">
+
+		$('dd').addClass('invisable');
+
+		$('dt').click(function() {
+                $(this).next().toggleClass('invisable');
+
+		});
+	    
+	    $('li').each(function(index) {
+    		if (index % 2 != 0) {
+        		$(this).css('background-color', '#CCC');
+		    }
+		});
+
+		$('ul').each(function(index) {
+			$(this).children().first().css('font-weight', 'bold');
+
+            }); 
+
+		
+
+		$('ul').addClass('invisable');
+
+		$('h3').click(function() {
+                $(this).next().toggleClass('invisable');
+
+		});
+
+	</script>
+
+	<!-- <a href="#" id="hide-dd">Click to remove.</a> -->
+</body>
+</html>

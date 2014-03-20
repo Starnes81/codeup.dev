@@ -13,8 +13,8 @@
 <!-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script> -->
 	<style type="text/css">
 
-	.invisable {
-		display: none;
+	button {
+		margin: 20px;
 	}
 
 	</style>
@@ -25,42 +25,41 @@
 	<div class="container">
 		<h1 id="codeup" class="clickable">FAQ - Arches National Park</h1>
 
-		
+		<button id="0">Show Answers</button>
 
 		<div >
 			<dl>
-				<dt> 1. Can I reserve a campsite?  </dt>
-					<dd>Yes. In fact, from March through October, individual sites at Devils Garden Campground must be 		reserved in advance. </dd>
-				<dt> 2. What facilities does the campground have? </dt>
-					<dd>Devils Garden has 52 sites with fire rings, picnic tables, bathrooms and running water (no showers)	   . RV Hookups are not available. </dd>
-				<dt> 3. Can I backpack in Arches? </dt>
-					<dd>Yes, although there just a few areas where backpacking is allowed. </dd>
-				<dt> 4. What about winter camping? </dt>
-					<dd>During the winter (November 1 through February 28), 24 campsites are available on a first-come, 	first-served basis. </dd>
-				<dt> 5. What's the maximum RV length in the campground? </dt>
-					<dd>Some sites will accommodate RVs up to 30 feet long. </dd>
-				<dt> 6. When was Arches established? </dt>
-					<dd>On April 12, 1929, Arches became a National Monument.
+				<dt id="1"> 1. Can I reserve a campsite?  </dt>
+					<dd id="1b">Yes. In fact, from March through October, individual sites at Devils Garden Campground must be 		reserved in advance. </dd>
+				<dt id="2"> 2. What facilities does the campground have? </dt>
+					<dd id="2b">Devils Garden has 52 sites with fire rings, picnic tables, bathrooms and running water (no showers)	   . RV Hookups are not available. </dd>
+				<dt id="3"> 3. Can I backpack in Arches? </dt>
+					<dd id="3b">Yes, although there just a few areas where backpacking is allowed. </dd>
+				<dt id="4"> 4. What about winter camping? </dt>
+					<dd id="4b">During the winter (November 1 through February 28), 24 campsites are available on a first-come, 	first-served basis. </dd>
+				<dt id="5"> 5. What's the maximum RV length in the campground? </dt>
+					<dd id="5b">Some sites will accommodate RVs up to 30 feet long. </dd>
+				<dt id="6"> 6. When was Arches established? </dt>
+					<dd id="6b">On April 12, 1929, Arches became a National Monument.
 						On November 12, 1971, Arches became a National Park. </dd>
-				<dt> 7. How big is the park? </dt>
-					<dd>76,519 acres or 119 square miles. </dd>
-				<dt> 8. How many arches are in the park? </dt>
-					<dd>No one knows for sure. Over 2,000 have been recorded. Some may have fallen and new arches may yet be forming. </dd>
-				<dt> 9. What is the largest arch? What is the tallest arch? </dt>
-					<dd>The light opening beneath Landscape Arch is 306 feet (93.3 meters) across. Double Arch South has a 	   vertical light opening of 144 feet (43.8 meters). </dd>
-				<dt>10. How many visitors come to Arches every year? </dt>
-					<dd>In 2010, the park received over one million visitors. </dd>	
+				<dt id="7"> 7. How big is the park? </dt>
+					<dd id="7b">76,519 acres or 119 square miles. </dd>
+				<dt id="8"> 8. How many arches are in the park? </dt>
+					<dd id="8b">No one knows for sure. Over 2,000 have been recorded. Some may have fallen and new arches may yet be forming. </dd>
+				<dt id="9"> 9. What is the largest arch? What is the tallest arch? </dt>
+					<dd id="9b">The light opening beneath Landscape Arch is 306 feet (93.3 meters) across. Double Arch South has a 	   vertical light opening of 144 feet (43.8 meters). </dd>
+				<dt id="10">10. How many visitors come to Arches every year? </dt>
+					<dd id="10b">In 2010, the park received over one million visitors. </dd>	
 			</dl>
 		</div>
 
 		
 			<h3>Arches</h3>
 			<ul> 
-			    <li>Linux</li>
-			    <li>Apache</li>
-			    <li>MySQL</li>
-			    <li>PHP</li>
-			    <li>Javascript</li>
+			    <li>Over 2000 arches.</li>
+			    <li>Has a large balancing rock</li>
+			    <li>A collection of tall stone columns</li>
+			    <li>A very thin and long arch with a span of 290 feet.</li>
 			</ul>
 			<h3>Badlands</h3>
 			<ul> 
@@ -87,12 +86,24 @@
 
 <script type="text/javascript">
 
-		$('dd').addClass('invisable');
+		// 	$('h3').on('click', function () {
+		// 	$(this).fadeOut(1000).next().fadeOut(1000);
+		
+		// });
 
-		$('dt').click(function() {
-                $(this).next().toggleClass('invisable');
+		$('#0').click(function() {
+                $('dd').fadeToggle(800, swing);
+
 
 		});
+
+		$('dt').click(function() {
+                $(this).next().fadeToggle(800);
+
+
+		});
+
+		
 	    
 	    $('li').each(function(index) {
     		if (index % 2 != 0) {
@@ -110,7 +121,7 @@
 		$('ul').addClass('invisable');
 
 		$('h3').click(function() {
-                $(this).next().toggleClass('invisable');
+                $('li').hide();
 
 		});
 
